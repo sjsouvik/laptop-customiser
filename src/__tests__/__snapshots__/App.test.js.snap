@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Laptop customiser renders correctly 1`] = `
+<div>
+  <header>
+    <div
+      class="header__content"
+    >
+      <a
+        class="header__link"
+        href="https://www.apple.com/in/macbook-pro"
+        rel="noreferrer"
+        target="_blank"
+      >
+        <strong>
+          MacBook Pro
+        </strong>
+      </a>
+    </div>
+  </header>
+  <main>
+    <div
+      class="main__container"
+    >
+      <div
+        class="main__content"
+      >
+        <section>
+          <img
+            alt="macbook pro"
+            class="macbook-img"
+            src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp16touch-space-select-201911?wid=1808&hei=1686&fmt=jpeg&qlt=80&.v=1572825197207"
+          />
+        </section>
+        <section
+          class="configuration"
+        >
+          <h1>
+            loading...
+          </h1>
+        </section>
+      </div>
+    </div>
+    <div
+      class="price container"
+    >
+      <div
+        class="price__content"
+      >
+        <h1
+          class="price__value"
+        >
+          Total:
+           loading...
+        </h1>
+      </div>
+    </div>
+  </main>
+</div>
+`;
