@@ -21,16 +21,14 @@ const App = () => {
         .then((data) => {
           const configs = data.reduce((acc, config) => {
             if (config.type === "proe") {
-              acc = segregateBasedOnType(config, acc, "Processor");
+              return segregateBasedOnType(config, acc, "Processor");
             } else if (config.type === "mem") {
-              acc = segregateBasedOnType(config, acc, "Memory");
+              return segregateBasedOnType(config, acc, "Memory");
             } else if (config.type === "gfx") {
-              acc = segregateBasedOnType(config, acc, "Graphics");
+              return segregateBasedOnType(config, acc, "Graphics");
             } else if (config.type === "stg") {
-              acc = segregateBasedOnType(config, acc, "Storage");
+              return segregateBasedOnType(config, acc, "Storage");
             }
-
-            return acc;
           }, {});
 
           setConfigList(configs);
