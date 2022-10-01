@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container } from "./common/components";
-import { Header } from "./common/components";
-import { Description } from "./common/components";
-import { Price } from "./common/components";
+import { Header, Description, Container, Price } from "./common/components";
 import { segregateBasedOnType } from "./common/helper/utils";
 import { getDefaultPrice } from "./service";
 
