@@ -19,15 +19,15 @@ const App = () => {
       return fetch(`http://localhost:3004/components`)
         .then((response) => response.json())
         .then((data) => {
-          const configs = data.reduce((acc, config) => {
+          const configs = data.reduce((formattedData, config) => {
             if (config.type === "proe") {
-              return segregateBasedOnType(config, acc, "Processor");
+              return segregateBasedOnType(config, formattedData, "Processor");
             } else if (config.type === "mem") {
-              return segregateBasedOnType(config, acc, "Memory");
+              return segregateBasedOnType(config, formattedData, "Memory");
             } else if (config.type === "gfx") {
-              return segregateBasedOnType(config, acc, "Graphics");
+              return segregateBasedOnType(config, formattedData, "Graphics");
             } else if (config.type === "stg") {
-              return segregateBasedOnType(config, acc, "Storage");
+              return segregateBasedOnType(config, formattedData, "Storage");
             }
           }, {});
 
@@ -46,9 +46,11 @@ const App = () => {
           setLoading(false);
         });
     };
+
     setLoading(true);
     getMacComponents();
     setPriceLoading(true);
+
     getDefaultPrice()
       .then((data) => {
         setPrice(data.value);
