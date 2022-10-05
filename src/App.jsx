@@ -16,7 +16,7 @@ const App = () => {
 
   useEffect(() => {
     const getMacComponents = () => {
-      return fetch(`http://localhost:3004/components`)
+      return fetch(`/components`)
         .then((response) => response.json())
         .then((data) => {
           const configs = data.reduce((formattedData, config) => {

@@ -1,27 +1,15 @@
-import { fireEvent, render, waitFor, screen } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import App from "../App";
-import data from "../../server/db.json";
-
-const mockFetchCall = jest.spyOn(global, "fetch");
+import { server, rest } from "../testServer";
 
 describe("Laptop customiser", () => {
-  beforeEach(() => {
-    mockFetchCall
-      .mockResolvedValueOnce({
-        json: () => Promise.resolve(data.components),
-      })
-      .mockResolvedValueOnce({
-        json: () => Promise.resolve(data.price),
-      });
-  });
-
   it("should show the correct price when processor a is selected", async () => {
     const { getByTestId } = render(<App />);
     await waitFor(() => {
       fireEvent.click(getByTestId(`Processor_a`));
     });
     expect(getByTestId("Processor-details")).toHaveTextContent(
-      "2.3GHz 8-core 9th-generation Intel Core processor, Turbo Boost up to 4.8GHz"
+      /2.3GHz 8-core 9th-generation Intel Core processor, Turbo Boost up to 4.8GHz/i
     );
     expect(getByTestId("total-price")).toHaveTextContent(`₹239900`);
   });
@@ -47,13 +35,21 @@ describe("Laptop customiser", () => {
 
 describe("Tests error scenarios", () => {
   it("should show error if getDefaultPrice service fails", async () => {
-    mockFetchCall.mockRejectedValue().mockRejectedValue();
+    server.use(
+      rest.get("/components", (req, res, ctx) => {
+        return res(ctx.status(404));
+      }),
+
+      rest.get("/price", (req, res, ctx) => {
+        return res(ctx.status(404));
+      })
+    );
 
     const { getByText } = render(<App />);
 
     await waitFor(() => {
       expect(
-        getByText(`Something went wrong. Please try again later`)
+        getByText(/Something went wrong. Please try again later/i)
       ).toBeTruthy();
     });
   });
